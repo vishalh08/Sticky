@@ -45,7 +45,6 @@ body * {
 }
 
 .note {
-  background: #fff740;
   border-radius: 10px;
   box-shadow: 5px 5px 1px rgba(38, 39, 42, 0.5);
   display: flex;
@@ -82,13 +81,17 @@ body * {
 }
 
 .note-style-1 {
-  background: #f7f29a;
+  background: #faf36e;
 }
 
 .note-style-2 {
-  background: #bcfba5;
+  background: #97fffc;
 }
 
 .note-style-3 {
-  background: #b7e8ff;
+  background: #d9bdff;
+}
+
+.note-style-4 {
+  background: #ff7c94;
 }

@@ -28,7 +28,7 @@ function createNoteElement() {
 
 
 function getRandomNoteStyle() {
-    const styles = [1, 2, 3];
+    const styles = [1, 2, 3, 4];
     const randomStyle = styles[Math.floor(Math.random() * styles.length)]
 
     return `note-style-${randomStyle}`;
