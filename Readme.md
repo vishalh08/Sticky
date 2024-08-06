@@ -1,2 +1,1 @@
-JavascriptDom!
-[object HTMLParagraphElement]
+StickyNote, Javascript DOM manupulation project 
