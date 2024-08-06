@@ -1,160 +1,60 @@
-//getElementbyId()
-// const colorList = document.getElementById("colors");
-// console.log(colorList);
+const btnAddNote = document.querySelector(".add-note");
+const notesConatiner = document.querySelector(".notes-container");
+const notesCountLable = document.querySelector(".note-count")
 
-// //querySelector()-Id
-// const colorListQuerySelectorId = document.querySelector("#colors");
-// console.log(colorListQuerySelectorId);
+{/* <div class="note note-style-2">
+				<input type="text" class="note-title" placeholder="Enter note title...">
+				<textarea class="note-body" placeholder="Enter note body..."></textarea>
+			</div> */}
+function createNoteElement() {
+    const note = document.createElement("div")
+    const title = document.createElement("input")
+    const body = document.createElement("textarea")
 
-// //querySelector()-Tag name
-// const colorListQuerySelectorTagName = document.querySelector("ul");
-// console.log(colorListQuerySelectorTagName);
+    note.classList.add("note", getRandomNoteStyle())
 
-// //querySelector()-class name
-// const colorListQuerySelectorClassName = document.querySelector(".primary");
-// console.log(colorListQuerySelectorClassName);
+    title.classList.add("note-title");
+    title.setAttribute("type", "text");
+    title.setAttribute("placeholder", "Enter note title...");
 
+    body.classList.add("note-body");
+    body.setAttribute("placeholder", "Enter note body...");
 
-// //querySelectorAll()-Tag name- returns array
-// const colorListQuerySelectorAllTagName = document.querySelectorAll("li");
-// console.log(colorListQuerySelectorAllTagName);
+    note.appendChild(title);
+    note.appendChild(body);
 
-
-// //querySelectorAll()-Tag name specific- returns array
-// const colorListQuerySelectorAllTagNameSpecific = document.querySelectorAll("#colors li");
-// console.log(colorListQuerySelectorAllTagNameSpecific);
-
-// //same as above
-
-// const colorListQuerySelectorAllTagNameUsingMultiple = colorList.querySelectorAll("li");
-// console.log(colorListQuerySelectorAllTagNameUsingMultiple);
-
-//DIR
-//console.dir
-//There are MANY properties and mehods to explore onc an element is selected
-// const introParagraph = document.querySelector(".introduction");
-// console.dir(introParagraph);//[object HTMLParagraphElement]->[object HTMLElement]
-// console.log(introParagraph.clientHeight);
-
-// const theName = document.querySelector(".name");
-// console.log(theName.getAttribute("title"));
-// console.log(theName.getAttribute("class"));
-// console.log(theName.getAttribute("for"));
-// console.log(theName.hasAttribute("class"));
-// console.log(theName.hasAttribute("for"));
-
-// const skillList = document.querySelector(".skills")
-// const items = skillList.children // LIVE HTML
-
-// const myList = document.querySelector(".skills");
-// const css = document.querySelector(".skills li:nth-of-type(2)");
-// console.log(css.parentElement.parentElement.parentElement.parentElement);
-
-// const css = document.querySelector(".skills li:nth-of-type(2)");
-// console.log(css.closest(".card"));
-
-// const myText = document.querySelector(".name");
-// console.log(myText.textContent.trim())
-
-//UPdating the Elements Attribute
-
-// const theName = document.querySelector(".name");
-// theName.setAttribute("class", "name coffee");
-// theName.className= "name coffee";
-
-// const myList = document.querySelector(".skills").lastElementChild;
-// myList.style.color = "orange"
-// myList.style.backgroundColor = "#f0f0f0"
+    return note;
+}
 
 
-// Updating the inner html property 
+function getRandomNoteStyle() {
+    const styles = [1, 2, 3, 4];
+    const randomStyle = styles[Math.floor(Math.random() * styles.length)]
 
-// const skillList = document.querySelector(".skills");
-// skillList.innerHTML = `
-// <li>bmw</li>
-// <li>toyota</li>
-// <li>honda</li>
-// `;
+    return `note-style-${randomStyle}`;
+}
 
-// const skillList = document.querySelector(".skills");
-// skillList.insertAdjacentHTML("beforeend", "<li>java</li>");
+function updateNotesCount() {
+    const notesCount = notesConatiner.children.length;
+    notesCountLable.textContent = `${notesCount} note${notesCount != 1 ? "s" : ""}`;
+    console.log(notesCount);
 
+}
 
-// text content- update the text content of an element
-// const skillList = document.querySelector(".skills li");
-// skillList.textContent= "ruby"
+btnAddNote.addEventListener("click", () => {
+    const note = createNoteElement();
 
-//Updating Class of an element
-// const newclassName = document.querySelector(".name");
-// newclassName.classList.add("coffee")
-// newclassName.classNmea +="coffee"
+    note.addEventListener("dblclick", () => {
+        const title = note.querySelector('.note-title').value;
+        const removeNote = confirm(`Are you sure you wish to delete '${title}'?`)
+        if (!removeNote) {
+            return
+        }
+        note.remove();
+        updateNotesCount();
+    });
 
-/* <div class="card">
-<div class="name" title="I am Vishal ">Vishal</div>
-<ul class="skills">
-  <li>HTML</li>
-  <li>CSS</li>
-  <li>JS</li>
-  <li>TS</li>
-</ul>
-</div> */
+    notesConatiner.appendChild(note);
+    updateNotesCount();
 
-//Block
-// const skills = ["HTML", "CSS", "JS"]
-
-// const card = document.createElement("div");
-// const nameElement = document.createElement("div");
-// const skillsListElement = document.createElement("ul");
-
-
-// card.classList.add("card");
-// document.body.appendChild(card);
-
-// nameElement.classList.add("name");
-// nameElement.setAttribute("title", "I am Vsihal");
-// nameElement.textContent = "Vishal"
-
-// for (const skill of skills) {
-//     const skillElement = document.createElement("li")
-//     skillElement.textContent = skill;
-//     skillsListElement.append(skillElement)
-// }
-
-// skillsListElement.classList.add("skills");
-
-// card.append(nameElement, skillsListElement); 
-
-//Block end
-
-// const skillsList = document.querySelector(".skills")
-// const css = skillsList.querySelector("li:nth-of-type(2)")
-
-// while (skillsList.lastChild) {
-//     skillsList.removeChild(skillsList.lastChild)
-// }
-
-// Adding events to HTML element
-
-const usernameInput = document.querySelector(".username");
-const btnCheck = document.querySelector(".check-username");
-
-btnCheck.addEventListener("click", function () {
-  const username = usernameInput.value;
-  const usedUsernames = ["dom", "dom72", "dcode21"]
-
-  if (username.length === 0) {
-    alert("pleaee enter a username!");
-    return;
-  }
-
-  if (usedUsernames.includes(username)) {
-    alert("Sorry this username is taken.")
-  }
-  else {
-    alert("username available!")
-  }
-})
-
-usernameInput.addEventListener("change", function () {
-  alert("you changed the username")
-})
+});
